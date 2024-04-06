@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy</title>
+    <%- include("../include/head") %>
+
+    <style>
+      main {
+        min-height: 80dvh;
+        text-align: center;
+        padding: 1% 6%;
+        font-size: 1.1rem;
+      }
+      footer{
+        margin-top: 7rem;
+      }
+      .main-t{
+        font-size: 2.1rem;
+        margin: 2rem 0;
+      }
+      #sec-1 > div{
+        margin-top: 2rem;
+      }
+      #sec-1 h3{
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+      .mail-to{
+        color: #FBBC04;
+        font-weight: bold;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("../include/simple-header") %>
+    <main>
+      <% if (currUser) { %>
+      <h1 class="main-t imp-txt txt-cap">Hello <%= currUser.name %>,👋</h1>
+      <% } %>
+      <h1 class="main-t">Privacy Policy</h1>
+      <section class="sec" id="sec-1">
+        <div>
+          Thank you for using our project
+          <span class="imp-txt">Notty</span>. This Privacy Policy is
+          designed to inform you about the types of information we collect, how
+          we use it, and the circumstances under which we may disclose it to
+          others. By using the Project, you consent to the collection and use of
+          information in accordance with this policy.
+        </div>
+
+        <div>
+            <h3>Information Collection and Use</h3>
+        <div>
+          We do not collect any personally identifiable information through the
+          Project. Any data generated or provided during the use of the Project
+          is solely for academic purposes and will not be used for any other
+          intent.
+        </div>
+        </div>
+        <div>
+            <h3>Log Data</h3>
+        <div>
+          We may collect information that your browser sends whenever you use
+          the Project. This Log Data may include information such as your
+          computer's Internet Protocol ("IP") address, browser type, browser
+          version, the pages of the Project that you visit, the time and date of
+          your visit, the time spent on those pages, and other statistics.
+          However, this information is used solely for academic research and
+          analysis and is not linked to any personally identifiable information.
+        </div>
+        </div>
+        <div>
+            <h3>Cookies</h3>
+        <div>The Project does not use cookies to track user.</div>
+        </div>
+        <div>
+            <h3>Security</h3>
+        <div>
+          The security of your data is important to us, but please remember that
+          no method of transmission over the Internet or method of electronic
+          storage is 100% secure. While we strive to use commercially acceptable
+          means to protect your data, we cannot guarantee its absolute security.
+        </div>
+        </div>
+
+        <div>
+            <h3>Links to Other Sites</h3>
+        <div>
+          The Project may contain links to other sites. If you click on a
+          third-party link, you will be directed to that site. Note that these
+          external sites are not operated by us. Therefore, we strongly advise
+          you to review the Privacy Policy of these websites. We have no control
+          over and assume no responsibility for the content, privacy policies,
+          or practices of any third-party sites or services.
+        </div>
+        </div>
+
+        <div>
+            <h3>Changes to This Privacy Policy</h3>
+
+        <div>
+          We may update our Privacy Policy from time to time. Thus, we advise
+          you to review this page periodically for any changes. We will notify
+          you of any changes by posting the new Privacy Policy on this page.
+          These changes are effective immediately after they are posted on this
+          page.
+        </div>
+        </div>
+
+        <div>
+            <h3>Contact Us</h3>
+
+        <div>
+          If you have any questions or suggestions about our Privacy Policy, do
+          not hesitate to contact us.
+          <a href="mailto:notty@gmail.com" class="mail-to">Mail To Notty Team</a>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include("../include/footer") %>
+  </body>
+</html>

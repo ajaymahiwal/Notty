@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note : <%= note.name.toUpperCase() %></title>
+    <%- include("../include/head") %>
+
+    <style>
+
+        main {
+          margin-block: 3vw;
+          padding-inline: 6%;
+          min-height: 80dvh;
+        }
+        
+        .green-btn {
+          display: block;
+          margin: 1vw auto;
+          border: none;
+          border-radius: 3rem;
+          padding: 0.5rem 4rem;
+          color: white;
+          font-size: 1.2rem;
+          background-color: #FBBC04;
+        }
+        .note-list{
+            font-size: 1.2rem;
+            font-weight: 500;
+            border: 1px solid #FBBC04;
+            padding: 2px 5px;
+        }
+        .note-lists-names{
+            padding-left: 1vw;
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2vw;
+        }
+  
+        time{
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-block: .4rem;
+        }
+        time:nth-of-type(2){
+            border-bottom: 2px solid red;
+            width: fit-content;
+        }
+        .highlight{
+            background-color: yellow;
+        }
+        
+        .del-btn{
+          background-color: rgba(255, 0, 0, 0.89);
+        }
+        .red-btn{
+          background-color: rgba(255, 0, 0, 0.89);
+        }
+        .isCompleted{
+            border-radius: 0 !important;
+            padding: .3rem 3rem !important;
+        }
+        .main-title{
+            border-bottom: 2px solid #FBBC04;
+        }
+        #sec-1{
+            display: flex;
+            flex-direction: column;
+            row-gap: 2vw;
+        }
+        .note-des{
+            white-space: pre-line;
+            min-height: 5rem;
+            padding-inline-start: 14ch;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .flex{
+            margin-top: 35dvh;
+            display: flex;
+        }
+        .msg-for-list {
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      
+        #confirmBox{
+            background-color:black;
+            color: white;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 70vw;
+            padding: 2vw;
+            z-index: 2;
+            text-align: center;
+            border-radius: 1rem;
+        }
+        .confirm-box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #confirmBox > div{
+            margin: 2vw 0;
+            display: flex;
+            gap: 2vw;
+        }
+        .hide{
+            display: none !important;
+        }
+        .focus-eff{
+            animation: focusEff .1s;
+        }
+        @keyframes focusEff {
+            0%{
+                /* transform: translateY(0px); */
+                transform: translate(-50%,-50%);
+            }
+            50%{
+                transform: translate(-40%,-50%);
+            }
+            100%{
+                transform: translate(-50%,-50%);
+            }
+        }
+
+        @media(width<=650px){
+            .note-des{
+            padding-inline-start: 0ch;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .main-title{
+            font-size: 2rem;
+            
+        }
+        
+        .lists-with-note{
+            margin-top: 2rem;
+        }
+        .green-btn {
+          margin: 1rem auto;
+          padding: 0.5rem 2rem;
+          font-size: 1.2rem;
+        }
+        .flex{
+            flex-wrap: wrap;
+        }
+        }
+
+        @media(width<=500px){
+        #confirmBox .green-btn {
+          margin: 1rem auto;
+          padding: .4rem 2rem;
+          font-size: 1rem;
+        }
+        .main-title{
+            font-size: 1.8rem;
+        }
+        }
+        @media(width<=360px){
+        #confirmBox .green-btn {
+          margin: .2rem auto;
+          padding: .1rem 2rem;
+          font-size: 1rem;
+        }
+        #confirmBox{
+            padding: 1rem;
+        }
+        #confirmBox > div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        }
+
+        .urgent-msg{
+            border: 2px solid red;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: .5rem;
+            margin-bottom: 2.5rem;
+        }
+        .urgent-msg i{
+            align-self: flex-end;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .add-now{
+            text-align: center;
+            font-size: 1rem !important;
+            padding: .2rem 1rem !important;
+            /* width: 40%; */
+        }
+        .created-at{
+            font-size: 1.250rem;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+      </style>
+</head>
+<body>
+    <%- include("../include/simple-header") %>
+    <%- include("../include/flash-msg.ejs") %>
+
+    <main>
+
+
+
+        <section class="sec" id="sec-1">
+            <h1 class="txt-cap imp-txt main-title">Note : <%= note.name %></h1>
+            <div>
+                <h1 class="imp-txt">Description :</h1>
+                <p class="note-des"><%= note.description %></p>
+                <p class="created-at">Created At: <%= note.created_at %></p>
+            </div>
+            
+        
+        
+            <% if(note.list && note.list.length) {%>
+                <div class="lists-with-note">
+                    <h1>Lists Name In Which This <span class="imp-txt">Note</span> Is Present:</h1>
+                    <div class="note-lists-names">
+                        <% for( let i = 0; i < note.list.length; i++ ) { %>
+                            <span class="note-list txt-cap"> <%= note.list[i] %> </span>
+                        <% } %>
+                    </div>
+                </div>
+            <% } else{%>
+                <p class="msg-for-list">This <span class="imp-txt txt-cap">Note</span> is not present in any lists.</p>
+            <% } %>
+            
+            <div class="flex">
+                <a href="/notes/<%= note._id %>/edit" class="green-btn">Edit Note</a>        
+                <button class="green-btn del-btn">Delete Note</button>        
+            </div>
+
+            <div id="confirmBox" class="confirm-box hide">
+                <h1>Do You Want To Delete <span class="txt-cap imp-txt"><%= note.name %></span> Note ?</h1>
+                <div>
+                    <form action="/notes/<%= note._id %>?_method=DELETE" method="post">
+                        <button class="green-btn del-btn">Yes,I want</button>
+                    </form>
+                    <button class="green-btn" id="no-btn">No</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    
+    <%- include("../include/footer.ejs") %>
+
+    <script>
+        let delBtn = document.querySelector('.del-btn');
+        let confirmBox = document.querySelector('#confirmBox');
+
+
+        delBtn.addEventListener('click',(e)=>{
+            confirmBox.classList.toggle("hide");
+
+
+            if(!confirmBox.classList.contains('hide')){
+            window.addEventListener('click',(e)=>{
+                // console.log(e.target);
+                if((e.target != confirmBox) && (e.target != delBtn) ){
+                    confirmBox.classList.add('focus-eff');
+                    if(confirmBox.classList.contains('focus-eff')){
+                        setTimeout(()=>{
+                            // console.log('effect class is deleted !');
+                            confirmBox.classList.remove('focus-eff');
+                        },500);
+                    }
+                }
+            })
+        }
+        })
+
+        let noBtn = document.querySelector("#no-btn");
+        noBtn.addEventListener('click',(e)=>{
+            confirmBox.classList.add("hide");
+        })
+        
+    
+    </script>
+    <script>
+        let closeBtn = document.querySelector(".close-btn");
+        let urgentMsg = document.querySelector(".urgent-msg");
+        closeBtn.addEventListener("click",(e)=>{
+            urgentMsg.classList.add("hide");
+        })
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <link
+      rel="shortcut icon"
+      href="/img/home-page/logo.png"
+      type="image/x-icon"
+    />
+    <style>
+      ::selection{
+        background-color: black;
+        color: white;
+      }
+      a{
+        text-decoration: none;
+      }
+      :root {
+        --top-options: 25dvh;
+        --all-list-options: 20dvh;
+        --main-bg: rgb(204, 154, 5);
+        /* --main-bg: #121212;  Main BG-Color */
+        /* --main-bg: #3f6d04; */
+        /* --main-bg: #376403; */
+        --gap-bw: 0.8rem;
+        --border-radius: 0.8rem;
+      }
+      body {
+        background-color: black;
+        color: white;
+      }
+      body a {
+        color: white;
+      }
+      main {
+        padding-top: var(--gap-bw);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-bw);
+        width: 100%;
+        /* border: 2px solid green; */
+        height: 100dvh;
+        /* overflow: hidden; */
+      }
+
+      main > div {
+        width: 100% !important;
+      }
+
+      .overview {
+        flex-grow: 2;
+        /* border: 2px solid red; */
+        gap: var(--gap-bw);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .top-options {
+        /* border: 2px solid red; */
+        background-color: var(--main-bg);
+        /* height: var(--top-options); */
+        padding:2rem 1rem;
+        border-radius: var(--border-radius);
+        /* remove height after adding real element inside top-options */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        /* margin-bottom: 1vw; */
+      }
+      main svg {
+        width: 1.5rem;
+      }
+      .top-options a {
+        font-size: 1.3rem;
+        color: white;
+      }
+      .top-options div a {
+        display: flex;
+      }
+      .top-options input {
+        padding: 0;
+        width: 95%;
+        font-size: 1rem;
+        font-weight: 400;
+        padding: 2px 0 2px 7px;
+        border-radius: 0.7rem;
+        border: none;
+      }
+      a > div {
+        margin-left: 0.5rem;
+      }
+      .top-options > div {
+        display: flex;
+      }
+      .my-profile{
+        font-size: 1.2rem;
+        font-weight: 500;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .my-profile a{
+        border: 2px solid white;
+        padding: 2px 1rem;
+        border-radius: 15px;
+      }
+      .my-profile a:hover{
+        background-color: #e7da20;
+        color:black;
+      }
+      .search-icon {
+        margin-inline: 0.5rem;
+        cursor: pointer;
+      }
+
+      .overview > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+      }
+      .list-section {
+        padding: 0.5rem;
+        background-color: var(--main-bg);
+        border-radius: var(--border-radius);
+      }
+
+      .all-list-options {
+        /* height: var(--all-list-options); */
+        /* border: 2px solid red; */
+        color: white;
+        border-bottom: 0.5px dotted white;
+      }
+
+      .all-list-options > div {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .all-list-options > div > div {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .all-list-options svg {
+        cursor: pointer;
+      }
+      .your-list {
+        font-size: 1.2rem;
+      }
+
+      .list-options {
+        /* border: 2px solid green; */
+        overflow-y: scroll;
+        padding-left: 0.7rem;
+        /* padding-bottom: 3rem !important; */
+        /* height: calc(100dvh - calc(var(--top-options) + var(--all-list-options))); */
+      }
+      .list-options::-webkit-scrollbar {
+        width: 0;
+      }
+      .list-options:hover::-webkit-scrollbar {
+        width: 5px !important;
+      }
+      .list-options {
+        overflow: -moz-scrollbars-none;
+      }
+      .list-options {
+        -ms-overflow-style: none;
+      }
+      .list-options::-webkit-scrollbar-thumb {
+        background-color: white;
+      }
+
+      .dashboard {
+        background-color: var(--main-bg);
+        border-radius: var(--border-radius);
+        flex-grow: 1;
+        /* overflow-y: scroll; */
+        width: 100%;
+        min-height: 70dvh !important;
+      }
+      .dashboard::-webkit-scrollbar {
+        width: 5px !important;
+      }
+      .dashboard {
+        overflow: -moz-scrollbars-none;
+      }
+      .dashboard {
+        -ms-overflow-style: none;
+      }
+      .dashboard::-webkit-scrollbar-thumb {
+        background-color: white;
+      }
+
+      .list {
+        display: flex;
+        /* border: 2px solid red; */
+        align-items: center;
+        gap: 1vw;
+        cursor: pointer;
+
+      }
+      .list:hover {
+        background-color: #181818;
+      }
+      .list img {
+        width: 3vw;
+      }
+      .list > div {
+        font-size: 1.2rem;
+        text-transform: capitalize;
+      }
+      
+      .list-name-and-more{
+        width: 100%;
+        /* border: 2px solid red; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .list-name-and-more > div:nth-child(2){
+        margin-right: 1vw;
+      }
+      .imp-list-sec {
+        margin-top: 1vw;
+      }
+      #list-content {
+        display: flex;
+        flex-direction: column;
+        padding: 2vw;
+        gap: 2vw;
+      }
+      
+      #listing-data {
+        padding-left: 2vw;
+      }
+      #listing-data > a {
+        display: block;
+        /* border: 2px solid white; */
+        margin-bottom: 1rem;
+      }
+      #listing-data p {
+        cursor: default;
+      }
+      .list-title-name{
+        text-transform: capitalize;
+      }
+
+      .dashboard-top {
+        padding: 2vw;
+      }
+      .dashboard-top > h1 {
+        /* text-decoration: underline 2px double white; */
+        margin-bottom: 1vw;
+      }
+      .imp-dashB-links ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2vw;
+        padding-left: 2vw;
+      }
+      .imp-dashB-links ul li {
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 0.5vw 4vw;
+        font-size: 1.2rem;
+        transition: all 1s;
+        list-style: none;
+      }
+      .imp-dashB-links ul li:hover {
+        background-color: #312d2d96;
+      }
+      .lists-tip {
+        line-height: 1;
+        text-transform: capitalize;
+      }
+      
+      /* .search-icon:active{
+        width: 25vw;
+      } */
+      .list-crud-op{
+        padding: 1.2vw 1.5vw;
+      }
+      .list-crud-box{
+        border: 2px solid white;
+        border-radius: 5px;
+        display: none;
+        margin: 1vw 2vw;
+      }
+      .list-crud-box button{
+        display: inline-block;
+        background-color: inherit;
+        width: 100%;
+        text-align: left;
+        color: white;
+        /* margin-bottom: 5px; */
+        border: none;
+        font-size: 1.1rem;
+      }
+      .list-crud-box button:hover{
+        background-color: #222222;
+      }
+
+      .show-me{
+        padding: 1vw;
+        display: flex !important;
+        gap: .6vw;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+      }
+      .reload-btn{
+        background-color: white;
+        border: none;
+        padding: .4rem 1.2rem;
+        font-size: 1.1rem;
+        border-radius: 5px;
+      }
+
+      .list-section{
+        max-height: 20rem;
+      }
+      .height-increase {
+        max-height: 50rem !important;
+      }
+    </style>
+    <link rel="stylesheet" href="/css/dashboard-respo.css">
+  </head>
+  <body>
+   
+    <% if (errorMsg && errorMsg.length) { %>
+      <p class="error-msg"><%= errorMsg %> <button class="reload-btn">Reload Page</button></p>
+      <% } %>
+      <div class="reload-btn" style="display: none;">ye add ker rha hu element kyuki -> To Remove the console error reading null</div>
+
+    <main id="main">
+      <div class="overview" >
+        <div class="top-options">
+          <div>
+            <a href="/"><div><svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="rgba(255,255,255,1)"
+            >
+              <path
+                d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM11 13V19H13V13H11Z"
+              ></path>
+            </svg></div></a>
+            <a href="/dashboard"><div>Dashboard</div></a>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="searching"
+              id="search-value"
+              placeholder="Search Your List"
+            /><svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="rgba(255,255,255,1)"
+              class="search-icon"
+            >
+              <path
+                d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="my-profile">
+            <a href="/user/profile/<%= currUser._id %>" target="_blank">My Profile</a>
+            <a href="/notes" target="_blank">All Notes</a>
+          </div>
+        </div>
+
+        <div class="list-section" id="listMainSec">
+          <div class="all-list-options">
+            <div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="rgba(255,255,255,1)"
+                >
+                  <path
+                    d="M8.00008 6V9H5.00008V6H8.00008ZM3.00008 4V11H10.0001V4H3.00008ZM13.0001 4H21.0001V6H13.0001V4ZM13.0001 11H21.0001V13H13.0001V11ZM13.0001 18H21.0001V20H13.0001V18ZM10.7072 16.2071L9.29297 14.7929L6.00008 18.0858L4.20718 16.2929L2.79297 17.7071L6.00008 20.9142L10.7072 16.2071Z"
+                  ></path>
+                </svg>
+                <div class="your-list">Your List</div>
+              </div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="rgba(255,255,255,1)"
+                  id="newListIcon"
+                >
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+                
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="listHeightInc" fill="rgba(255,255,255,1)"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-options">
+            <div class="all-lists">
+              <% for( let i = 0; i < currUser.lists.length; i++ ) { %>
+              <div class="list imp-list-sec" id="list-<%=i%>">
+                <!-- <img src="/img/home-page/logo.png" alt="" /> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(255,255,255,1)"><path d="M11 4H21V6H11V4ZM11 8H17V10H11V8ZM11 14H21V16H11V14ZM11 18H17V20H11V18ZM3 4H9V10H3V4ZM5 6V8H7V6H5ZM3 14H9V20H3V14ZM5 16V18H7V16H5Z"></path></svg>
+                <div class="list-name-and-more">
+                  <div class="list-name"><%= currUser.lists[i] %></div>
+                  <div class="d-block list-crud-op">:</div>
+                </div>
+              </div>
+              <div id="list-crud-box-<%=i%>" class="list-crud-box">
+                <form action="/lists/edit">
+                  <input type="text" name="listName" id=""value="<%=currUser.lists[i]%>" style="display:none;">
+                  <button>Edit List</button>
+                </form>
+                <form action="/lists/delete?_method=DELETE" method="post">
+                  <input type="text" name="listName" id="" value="<%=currUser.lists[i]%>" style="display: none;"> 
+                  <button>Delete List</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-top">
+          <h1>Dashboard</h1>
+          <div class="imp-dashB-links">
+            <ul>
+              <li><a href="/notes/new" target="_blank">Create New Note</a></li>
+              <!-- <li><a href="/notes" target="_blank">Show All Notes</a></li> -->
+            </ul>
+          </div>
+        </div>
+
+        <div id="list-content">
+          <% if (currUser.lists.length == 0) { %>
+          <p>
+            Note : You Don't Have Any Lists, You can create and can see Notes of
+            that list here.
+          </p>
+          <% } else{%>
+          <p class="lists-tip">
+            Tip : Click on any list and see Notes of that list.
+          </p>
+          <% } %>
+          <!-- Adding Whole data using js -->
+        </div>
+      </div>
+    </main>
+
+
+ 
+
+    <script defer>
+      const topOptions = document.querySelector(".top-options");
+      // console.log(topOptions);
+      const allListOptions = document.querySelector(".all-list-options");
+      // console.log(allListOptions);
+      const listOptions = document.querySelector(".list-options");
+      // console.log(listOptions);
+      const totalHeight = window.innerHeight;
+
+      let removalHeight = topOptions.offsetHeight + allListOptions.offsetHeight;
+      // console.log(removalHeight);
+
+      listOptions.style.height = totalHeight - removalHeight + "px";
+
+      //// List and note related
+      const lists = document.getElementsByClassName("list");
+      // console.log(lists);
+
+      for (let list = 0; list < lists.length; list++) {
+        lists[list].addEventListener("click", async (event) => {
+          // console.log(event.target);
+          // console.log(event.currentTarget);
+          // console.log(event.target.getAttribute("id"));
+
+          let id = event.currentTarget.getAttribute("id");
+          let listName = event.currentTarget.children[1].children[0].innerText;
+          // console.log(id)
+          // console.log(listName)
+          let data = await getData(listName);
+          // console.log(data);
+          // let d = JSON.parse(data);
+
+          showData(listName, data);
+        });
+      }
+
+      function showData(listName, d) {
+        // console.log(d);
+        let showListData = `
+            <h1 class="d-ul-w">${listName}</h1>
+              <div id="listing-data" class="">
+                  
+              </div>
+          `;
+        const listContent = document.getElementById("list-content");
+        listContent.innerHTML = showListData;
+
+        // let listData=[];
+        let listingDataPar = document.getElementById("listing-data");
+
+        if (d.length != 0) {
+          for (let i = 0; i < d.length; i++) {
+            let mainList = document.createElement("div");
+            let h1 = document.createElement("h1");
+            let para = document.createElement("p");
+            let div = document.createElement("div");
+
+            h1.innerHTML = d[i].name;
+            h1.classList.add("list-title-name");
+            para.innerText = d[i].description;
+            mainList.append(h1, para);
+
+            let a = document.createElement("a");
+            a.setAttribute("href", "/notes/" + d[i]._id);
+            a.appendChild(mainList);
+            listingDataPar.append(a);
+            // console.log(listingDataPar);
+          }
+        }else{
+          if(listName.includes("List Not Found")){
+            listingDataPar.innerText = "Please Try Again With New List Name !!";
+          }else{
+            listingDataPar.innerText = "No Notes Are In This List. :("
+          }
+        }
+      }
+
+      async function getData(listName) {
+        // console.log("listName",listName);
+        let listDATA = {
+          name : listName
+        };
+        // console.log(listDATA)
+        // console.log(JSON.stringify(listDATA))
+
+        return fetch(`/lists/data`,{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(listDATA)
+        })
+        .then(function (response) {
+          // console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+    // Do something with data
+          // console.log(data);
+          return data;
+        })
+        .catch((err)=>console.log("error",error));
+
+        // // let jsonD = await raw.json();
+        // // console.log(jsonD);
+        // // return jsonD;
+        // return "";
+      }
+
+      //handling the search input from user side
+      let searchIcon = document.querySelector(".search-icon");
+      let searchValue = document.querySelector("#search-value");
+
+      searchIcon.addEventListener("click", async (e) => {
+        let val = searchValue.value;
+        if (val.length != 0) {
+          let data = await getSearchResult(val);
+          data = JSON.parse(data);
+          let listName = data[data.length-1];
+          if(listName){
+          data.pop(); //vo listname remove ker diya hai
+          showData(listName,data);
+          //1st arg is list name and 2nd arg is list k ander k notes
+          }else{
+            showData("List Not Found :( ",[]);
+          }
+        }
+      });
+
+      async function getSearchResult(val) {
+        let raw = await fetch(`/lists/search/data?q=${val}`);
+        let jsonD = await raw.json();
+        // console.log(raw);
+        // console.log(jsonD);
+        return jsonD;
+      }
+
+      let newListIcon = document.getElementById("newListIcon");
+      newListIcon.addEventListener("click", (e) => {
+        window.location.href = "/lists/new";
+      });
+
+      let listHeightInc = document.getElementById("listHeightInc");
+      let listMainSec = document.getElementById("listMainSec");
+      listHeightInc.addEventListener("click", (e) => {
+        // console.log("clicked")
+        listMainSec.classList.toggle("height-increase");
+      });
+
+      
+      // List styles and options edit delete etc
+      const listCRUDEle = document.getElementsByClassName("list-crud-op");
+
+      for(let i=0;i<listCRUDEle.length;i++){
+        listCRUDEle[i].addEventListener('click',(e)=>{
+          //  ("clicked")
+          const listCRUDBox = document.querySelector(`#list-crud-box-${i}`);
+          listCRUDBox.classList.toggle("show-me");
+      })
+      }
+
+      let reloadBtn = document.querySelector(".reload-btn");
+      reloadBtn.addEventListener('click',(e)=>{
+        window.location.href="/dashboard";//reload kervane k liye
+      })
+
+    </script>
+  </body>
+</html>

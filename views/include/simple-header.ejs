@@ -1,0 +1,70 @@
+
+
+
+<header id="responsive-header">
+    <div class="top-header">
+      <nav>
+        <ul class="ul-1">
+          <li>
+            <a href="/" id="main-logo">
+              <img src="/img/home-page/logo.png" alt="logo" class="logo" />
+              <span class="logo-name">Notty</span>
+            </a>
+          </li>
+          <li>
+          <li>
+            <div class="hamburger-menu"><i class="ri-menu-line logo"></i></d>
+          </li>
+      </nav>
+    </div>
+  </header >
+
+
+   <header class="common-header">
+    <nav>
+      <ul class="ul-1">
+        <li>
+          <a href="/" id="main-logo">
+            <img src="/img/home-page/logo.png" alt="logo" class="logo" />
+            <span class="logo-name">Notty</span>
+          </a>
+        </li>
+
+
+      </ul>
+      <ul>
+        <% if (typeof currUser == 'object' && currUser) { %>
+          <li><a href="/dashboard" class="dashboard-link">Dashboard</a></li>
+            <li>
+                <div class="hamburger-menu"><i class="ri-menu-line logo"></i></div>
+            </li>
+            <% } else { %>
+              <li><a href="/login">Login</a></li>
+         <% } %>
+    </ul>
+    </nav>
+  </header>
+
+
+  <div class="empty-for-header"></div>
+
+<div class="bottom-header hide" id="bottom-header-options">
+    <div>
+      <ul>
+          <% if (typeof currUser == 'object' && currUser) { %>
+            
+              <li>
+                <a href="/user/profile/<%= currUser._id %>" id="main-logo">
+                  <span class="header-user-name txt-cap imp-txt"><%= currUser.name %></span>
+                  <i class="ri-user-fill logo"></i>
+                </a>
+              </li> 
+              <li class=""><a href="/notes" id="all-notes">All Notes</a></li>
+              <li class=""><a href="/dashboard" class="dashboard-link" id="header-dashboard-btn">Dashboard</a></li>
+            <% } else { %>
+              <li class=""><a href="/login" class="green-btn-adv">Login</a></li>
+           <% } %>
+      </ul>
+    </nav>
+  </div>
+</div>

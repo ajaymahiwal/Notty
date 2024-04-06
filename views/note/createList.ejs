@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a new list</title>
+    <%- include("../include/head") %>
+    <!-- <link rel="stylesheet" href="/css/list-and-notes-form.css" /> -->
+
+    <style>
+      main {
+        margin-block: 3vw;
+        padding-inline: 6%;
+        min-height: 80dvh;
+      }
+
+      form {
+        margin-block: 3vw;
+      }
+
+      form > div {
+        width: 100%;
+      }
+      input {
+        width: 100%;
+        padding: 5px 3px;
+        border-radius: 5px;
+        border: 2px solid rgba(0, 0, 0, 0.322);
+      }
+      label {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      input[type="checkbox"] {
+        width: fit-content;
+      }
+
+      .msg-for-list {
+        margin-top: 1vw;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      .all-notes {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 3vw;
+        column-gap: 1.5vw;
+        padding: 1vw;
+      }
+      .notes-name {
+        text-transform: capitalize;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      button {
+        display: block;
+      }
+      .main-form button {
+        margin: 3rem auto;
+        border: none;
+        border-radius: 3rem;
+        padding: 0.5rem 4rem;
+        color: white;
+        font-size: 1.3rem;
+        background-color: #FBBC04;
+      }
+
+      .msg-for-list{
+        margin-top: 1.2rem;
+        text-decoration: underline 2px #FBBC04;
+      }
+
+      @media(width<=500px){
+        .main-title{
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+        input,label{
+          font-size: 1rem;
+          padding: 1px;
+        }
+      }
+      @media(width<=300px){
+        .main-title{
+          font-size: 1.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("../include/simple-header") %> <%-
+    include("../include/flash-msg.ejs") %>
+
+    <main>
+      <section class="sec" id="sec-1">
+        <h1 class="main-title">Create New List</h1>
+        <form action="/lists/new" method="post" class="main-form">
+          <div>
+            <label for="">List Name</label>
+            <input type="text" name="list[name]" id="" required />
+          </div>
+
+          <% if (notes.length > 0) { %>
+          <p class="msg-for-list">Add notes in this list, if you want :)</p>
+          <div class="all-notes">
+            <% notes.forEach(i => { %>
+            <div>
+              <label for="<%= i._id%>" class="notes-name">
+                <%= i.name %>
+              </label>
+              <input
+                type="checkbox"
+                name="listData[<%= i._id%>]"
+                id="<%= i._id %>"
+                value="<%= i._id %>"
+              />
+            </div>
+            <% }) %>
+          </div>
+          <% } else{%>
+          <p class="msg-for-list">
+            You don't have any notes,So No notes to add in this list.
+          </p>
+          <% } %>
+
+          <button>Create</button>
+        </form>
+      </section>
+    </main>
+
+    <%- include("../include/footer.ejs") %>
+  </body>
+</html>

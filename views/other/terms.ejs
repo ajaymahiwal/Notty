@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms And Conditions</title>
+    <%- include("../include/head") %>
+
+    <style>
+      main {
+        min-height: 80dvh;
+        text-align: center;
+        padding: 1% 6%;
+        font-size: 1.1rem;
+      }
+      footer {
+        margin-top: 7rem;
+      }
+      .main-t {
+        font-size: 2.1rem;
+        margin: 2rem 0;
+      }
+      #sec-1 > div {
+        margin-top: 2rem;
+      }
+      #sec-1 h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("../include/simple-header") %>
+    <main>
+      <% if (currUser) { %>
+      <h1 class="main-t imp-txt txt-cap">Hello <%= currUser.name %>,👋</h1>
+      <% } %>
+      <h1 class="main-t">Terms And Conditions</h1>
+      <section class="sec" id="sec-1">
+        Welcome to our project <span class="imp-txt">Notty</span>!
+
+        <div>
+          <h3>1. Use of Project</h3>
+          <div>
+            You are granted permission to use my project for educational
+            purposes only. This means you can access and interact with the
+            project materials, but you can't use it for commercial purposes or
+            share it with others outside of your educational context.
+          </div>
+        </div>
+
+        <div>
+          <h3>2. Intellectual Property</h3>
+          <div>
+            All the content, features, and functionality of the project belong
+            to the developers and are protected by copyright and other
+            intellectual property laws. You're not allowed to copy, modify, or
+            distribute any part of the project without permission.
+          </div>
+        </div>
+
+        <div>
+          <h3>3. No Warranty</h3>
+          <div>
+            While we strive to provide accurate and helpful information, we
+            can't guarantee that the project will always be error-free or
+            suitable for your needs. You use the project at your own risk, and
+            we're not responsible for any damages or losses that may occur.
+          </div>
+        </div>
+
+        <div>
+          <h3>4. Limitation of Liability</h3>
+          <div>
+            In no event will the developers of the project be liable for any
+            damages arising from your use of the project. This includes but is
+            not limited to direct, indirect, incidental, or consequential
+            damages.
+          </div>
+        </div>
+
+        <div>
+          <h3>5. Governing Law</h3>
+          <div>
+            These Terms are governed by the laws of India. Any disputes arising
+            from these Terms or your use of the project will be subject to the
+            jurisdiction of the courts in India.
+          </div>
+        </div>
+
+        <div>
+          <h3>6. Changes to Terms</h3>
+          <div>
+            We may update these Terms from time to time. If we make any
+            significant changes, we'll notify you by posting the new Terms on
+            this page. Your continued use of the project after the changes are
+            made constitutes your acceptance of the new Terms.
+          </div>
+        </div>
+
+        <div>
+          <h3>Contact Us</h3>
+
+          <div>
+            If you have any questions or suggestions about our Privacy Policy,
+            do not hesitate to contact us.
+            <a href="mailto:jaymahiwal007@gmail.com">Mail To Notty</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include("../include/footer") %>
+  </body>
+</html>

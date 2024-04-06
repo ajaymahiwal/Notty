@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= currUser.name.toUpperCase() %>'s All Notes</title>
+    <%- include("../include/head") %>
+
+    <style>
+      main{
+        margin-top: 2vw;
+        margin-bottom: 6rem;
+        padding: 1vw 5%;
+        min-height: 80dvh;
+      }
+      main > div:nth-child(1){
+        /* border: 2px solid red; */
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      main > div:nth-child(1) a{
+        background-color: #FBBC04;
+        font-size: 1.2rem;
+        color: white;
+        font-weight: 500;
+        padding: 3px 7px;
+        border-radius: 7px;
+      }
+      .main-heading{
+        font-size: 2.5rem;
+      }
+      #sec-1{
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+      #sec-1 > div{
+        border: 2px solid #FBBC04;
+        padding: 1vw;
+      }
+      #sec-1 > div > h3{
+        text-transform: capitalize;
+        font-size: 2rem;
+        font-weight: 500;
+      }
+      .show-in-detail{
+        display: block;
+        margin-top: 1vw;
+        /* font-size: 1.1rem; */
+        text-decoration: underline 2px #FBBC04;
+        font-weight: 500;
+      }
+
+      @media(width<=750px){
+        main > div:nth-child(1){
+        flex-wrap: wrap;
+      }
+      main > div:nth-child(1) > *{
+        width: 100%;
+      }
+      main > div:nth-child(1) a{
+        margin-top: 2vw;
+        width: 11rem;
+        text-align: center;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <%-include("../include/simple-header.ejs")%>
+    <%- include("../include/flash-msg.ejs") %>
+    
+    <main>
+        <div>
+            <% if (user.notes  && user.notes.length) { %>
+                <h1 class="main-heading">Your All Notes,<span class="imp-txt txt-cap"><%= currUser.name %> :)</span></h1>
+                <% } else{%>
+                    <h1 class="main-heading">You Don't Have Any Notes, <span class="imp-txt txt-cap"><%= currUser.name %>:)</span></h1>
+            <% } %>
+            <a href="/notes/new">Create New Note</a>
+        </div>
+        <section class="sec" id="sec-1">
+            <% for( let index = 0; index < user.notes.length; index++ ) { %>
+                <div>
+                  <h3><%= user.notes[index].name %></h3>
+                  <p><%= user.notes[index].description.substring(0,1000) %></p>
+                  <a href="/notes/<%= user.notes[index]._id %>" target="_blank" class="show-in-detail">Show In Detail</a>
+                </div>
+                <% } %> 
+        </section>
+
+
+        <!-- <section class="sec" id="sec-2">
+            <div>
+                
+            </div>
+        </section> -->
+    </main>
+
+    
+    <%-include("../include/footer")%>
+  </body>
+</html>

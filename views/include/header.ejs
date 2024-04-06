@@ -1,0 +1,58 @@
+<header id="responsive-header">
+  <div class="top-header">
+    <nav>
+      <ul class="ul-1">
+        <li>
+          <a href="/" id="main-logo">
+            <img src="/img/home-page/logo.png" alt="logo" class="logo" />
+            <span class="logo-name">Notty</span>
+          </a>
+        </li>
+        <li>
+        <li>
+          <h1 class="hamburger-menu"><i class="ri-menu-line"></i></h1>
+        </li>
+    </nav>
+  </div>
+</header >
+
+
+
+<header class="common-header">
+    <nav>
+      <ul class="ul-1">
+        <li>
+          <a href="/" id="main-logo">
+            <img src="/img/home-page/logo.png" alt="logo" class="logo" />
+            <span class="logo-name">Notty</span>
+          </a>
+        </li>
+
+      </ul>
+      <ul>
+          <% if (currUser) { %>
+            <li class="start-plan"><a href="/dashboard" class="dashboard-link">Dashboard</a></li>
+            <% } else { %>
+              <li class="start-plan"><a href="/login">Login</a></li>
+           <% } %>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div class="empty-for-header"></div>
+
+<div class="bottom-header hide" id="bottom-header-options">
+    <div>
+      <ul>
+          <% if (!currUser) { %>
+            <li class=""><a href="/login" class="green-btn-adv">Login</a></li>
+            <% } else { %>
+              <li class=""><a href="/dashboard" class="dashboard-link green-btn-adv">Dashboard</a></li>
+           <% } %>
+      </ul>
+    </nav>
+  </div>
+</div> 
+
+ 

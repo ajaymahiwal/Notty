@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You !</title>
+    <link rel="shortcut icon" href="/img/home-page/logo.png" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Source+Sans+Pro" rel="stylesheet">
+    <style>
+        body {
+            background: #ffffff;
+            background: linear-gradient(to bottom, #ffffff 0%, #e1e8ed 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e1e8ed', GradientType=0);
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        main {
+            text-align: center;
+            padding: 2rem;
+
+        }
+
+        h1 {
+            font-family: 'Kaushan Script', cursive;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            color: #FBBC04;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+        }
+
+        .go-home {
+            display: block;
+            width: 50%;
+            color: #fff;
+            background: #FBBC04;
+            border: none;
+            padding:.5rem 2rem ;
+            margin: 2.5rem auto;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            text-transform: capitalize;
+            box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
+        }
+        .imp-txt{
+            color: #FBBC04;
+            text-transform: capitalize;
+        }
+
+        @media (width<=360px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            }
+
+            .go-home {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="">
+            <h1>Thank you !  <span class="imp-txt"><%= currUser ? currUser.name : ""%></span></h1>
+            <h3>Thanks for subscribing to our news letter. </p>
+        </div>
+        <% if (isEmailExist) { %>
+            <h3>Hii, You are already subscribed the newsletter with this <%= user_email%> email account</h3>
+            <% } else{%>
+                <h3>Hii most welcome, You are a new subscriber with this <%= user_email%> email account</h3>
+                <% } %>
+
+            <a href="<%=pastPath?pastPath:"/" %>" class="go-home">Back To Work !</a>
+    </main>
+
+
+
+
+</body>
+
+</html>

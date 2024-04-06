@@ -1,0 +1,58 @@
+
+
+<footer class="footer">
+    <div class="footer-row">
+      <div class="footer-col">
+        <h4>Notty</h4>
+        <ul class="links">
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Upcoming Updates</h4>
+        <ul class="links">
+          <li><a>Custom Themes</a></li>
+          <li><a>Custom Dashboards</a></li>
+          <li><a>Reports And Summaries</a></li>
+          <li><a>Collaboration Tools</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Features</h4>
+        <ul class="links">
+          <li><a>Note Creation and Management</a></li>
+          <li><a>Search Functionality</a></li>
+          <li><a>List Creation and Organization</a></li>
+          <li><a>Mobile Responsiveness and Accessibility</a></li>
+          <li><a>Data Security</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p>
+          Subscribe to our newsletter for a weekly dose
+          of news, updates, helpful tips, and
+          exclusive offers. 
+        </p>
+        <form  method="post" id="newsletter-form">
+          <input type="email" name="email" placeholder="Your email" required>
+          <button type="submit">SUBSCRIBE</button>
+        </form>
+        <div class="icons">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-linkedin"></i>
+          <i class="fa-brands fa-github"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector("#newsletter-form").setAttribute("action",`/newsletter/email?pastPath=${window.location}`)
+  </script>

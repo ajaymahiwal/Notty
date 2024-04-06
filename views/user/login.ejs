@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <%- include("../include/head.ejs") %>
+    <script src="/js/common.js" defer></script>
+
+    <style>
+        .main-form{
+            width: 80vw;
+            /* border: 2px solid red; */
+            margin: 6vw auto;
+            /* min-height: 100dvh; */
+        }
+        .form-title{
+            font-size: 3rem;
+            text-align: center;
+        }
+        form{
+            margin-top: 1vw;
+            /* border: 2px solid blue; */
+        }
+        form input{
+            width: 100%;
+            padding: 2px 0;
+            font-size: 1.2rem;
+        }
+        input{
+            border: 1px solid rgb(92, 91, 91);
+        }
+        form > div{
+            margin-top: .7vw;
+        }
+        label{
+            font-size: 1.5rem;
+        }
+
+        .main-form button{
+            display: block;
+            border: none;
+            margin: 1rem auto;
+            padding: .7rem 10%;
+            font-size: 1.3rem;
+            background-color: #FBBC04;
+            color: white;
+            border-radius: 3rem;
+        }
+        .account-yes-or-not{
+            text-align: center;
+            margin-top: 5px;
+        }
+        .ref-links{
+            color: #FBBC04;
+            font-weight: 500;
+            text-decoration: underline #FBBC04;
+        }
+        .plan-holder-yt-iframe{
+            margin: 2vw auto;
+            width: fit-content;
+        }
+        iframe{
+            border-radius: 10px;
+            width: 55vw;
+            height: 30vw;
+        }
+        .plan-holder-yt-iframe > div{
+            margin-top: 1vw;
+            text-align: center;
+        }
+        .plan-holder-yt-iframe a:nth-child(1){
+            padding-right: 5px;
+            border-right: 2px solid black;
+        }
+        .awards{
+            margin: 1rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 80vw;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .awards div{
+            width: 15vw;
+            height: 15vw;
+            background-color: rgba(137, 43, 226, 0.459);
+        }
+        .or-main{
+            text-align: center;
+            width:85%;
+            margin: .7rem auto;
+            font-size: 1.2rem;
+        }
+        .or-main span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        .or-main span::before{
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            margin: auto 0;
+        }
+        .or-main span::after{
+            content: "";
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: black;
+            margin: auto 0;
+          
+        }
+        
+        .login-with-google{
+            text-align: center;
+            width: 30%;
+            font-size: 1.3rem;
+            margin: 0 auto;
+            background-color:red;
+            color: white;
+            padding-block: 4px;
+            border-radius: 2rem;
+        }
+        .login-with-google a{
+            color: white;
+        }
+
+        #integration{
+            width: 80%;
+            margin: 3rem auto;
+        }
+
+        footer{
+            margin-top:20rem;
+        }
+
+
+
+
+        /* responive part */
+        @media(width<=1000px){
+            .login-with-google{
+                width: 40%;
+            }
+        }
+        @media(width<=700px){
+            .login-with-google{
+                width: 50%;
+            }
+        }
+        @media(width<=550px){
+            .login-with-google{
+                width: 65%;
+            }
+        }
+        @media(width<=400px){
+            .login-with-google{
+                width: 90%;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media(width<=600px){
+            input,label{
+                padding: 1px;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+            input{
+                font-weight: 350;
+            }
+            .main-form button{
+            padding: .5rem 2rem;
+            font-size: 1.2rem;
+        }
+        }
+
+        @media(width<=450px){
+            .plan-holder-yt-iframe{
+            margin: 2vw auto;
+            width: fit-content;
+        }
+        iframe{
+            border-radius: 10px;
+            width: 80vw;
+            height: 40vw;
+        }
+        .plan-holder-yt-iframe > div{
+            margin-top: 1vw;
+            text-align: center;
+        }
+        .plan-holder-yt-iframe a:nth-child(1){
+            padding-right: 5px;
+            border-right: 2px solid black;
+        }
+        .awards{
+            margin: 1rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 90vw;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .awards div{
+            width: 20vw;
+            height: 20vw;
+            background-color: rgba(137, 43, 226, 0.459);
+        }
+
+        .main-form button{
+            padding: .4rem 2rem;
+            font-size: 1.1rem;
+        }
+        .form-title{
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        }
+    </style>
+    <link rel="stylesheet" href="/css/home-page.css">
+</head>
+<body>
+    <%- include("../include/header.ejs") %>
+
+    <% if (errorMsg && errorMsg.length) { %>
+        <p class="error-msg"> <%=errorMsg %></p>
+       <% } %>
+
+    <% if (currUser) { %>
+        <p class="success-msg">Great, You Are Logged In.</p>
+       <% } %>
+
+
+
+    <div class="main-form">
+        <h1 class="form-title">Capture Brilliance: Your Notes, Your Way</h1>
+        <form action="/login" method="post" id="user-main-form">
+            <div>
+                <label for="username">Email:</label>
+                <input type="email" name="username" id="username" required>
+            </div>
+            <div>
+                <label for="pass">Password:</label>
+                <input type="password" name="password" id="pass" required>
+            </div>
+            <button class="sign-log-btn">Log in</button>
+        </form>
+        <div class="or-main"><span> Or </span></div>
+        <div class="login-with-google"><a href="/login/google" class="login-with sign-log-btn"><i class="ri-google-fill"></i> Log In With Google</a></div>
+        
+        <p class="account-yes-or-not">Don't have a Notty account yet? <a href="/signup" class="ref-links">Sign up</a></p>
+    </div>
+<!-- 
+    <div class="plan-holder-yt-iframe">
+        <iframe src="https://www.youtube.com/embed/FiFvtuPX4xk?si=tjZTbz6TG3RSZ9tX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div>
+            <a href="" class="ref-links">Watch more videos</a>
+            <a href="" class="ref-links">Getting Started</a>
+        </div>
+    </div> -->
+
+    <!-- <div class="awards">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div> -->
+   
+    <%- include("../include/footer") %>
+
+    <script>
+        let signlogBtn = document.getElementsByClassName("sign-log-btn");
+
+        let form = document.querySelector("#user-main-form");
+
+form.addEventListener("submit",(e)=>{
+    for(let i=0;i<signlogBtn.length;i++){
+signlogBtn[i].addEventListener("click",(e)=>{
+signlogBtn[i].disabled = true;
+console.log("disabled");
+setTimeout(function(){
+    console.log("enabled");
+    signlogBtn[i].disabled = false;
+},5000);
+})
+}})
+    </script>
+</body>
+</html>

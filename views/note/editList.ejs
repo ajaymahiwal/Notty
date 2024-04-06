@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit List: <%= listName.toUpperCase() %></title>
+    <%- include("../include/head") %>
+    <style>
+
+      main {
+        margin-block: 3vw;
+        padding-inline: 6%;
+        min-height: 80dvh;
+      }
+
+      form > div {
+        width: 100%;
+      }
+      input {
+        width: 100%;
+        padding: 5px 3px;
+        border-radius: 5px;
+        border: 2px solid rgba(0, 0, 0, 0.322);
+      }
+      label {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      input[type="checkbox"] {
+        width: fit-content;
+      }
+      
+      
+      .green-btn {
+        display: block;
+        margin: 1rem auto 2rem;
+        border: none;
+        border-radius: 3rem;
+        padding: 0.5rem 4rem;
+        color: white;
+        font-size: 1.3rem;
+        background-color: #FBBC04;
+      }
+
+      .sec{
+        margin-top: 2rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .list-notes{
+        margin-top: 1vw;
+        border: 2px solid #FBBC04;
+        padding: 0 2vw;
+      }
+      .list-notes > h2{
+        margin-top: 1vw;
+      }
+      .all-notes {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 3vw;
+        column-gap: 1.5vw;
+        padding: 1vw;
+        
+      }
+      .single-note{
+        padding: .5vw 1vw;
+        display: flex;
+        /* flex-wrap: wrap; */
+        gap: 2vw;
+        align-items: baseline;
+        border: 2px solid black;
+      }
+      .notes-name {
+        text-transform: capitalize;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .del-btn{
+        background-color: rgba(255, 0, 0, 0.89);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .msg-for-list {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      
+      .main-title{
+        border: none;
+        text-decoration: underline 2px #FBBC04;
+      }
+      .added-notes,.not-added-notes{
+        margin-bottom: 2rem;
+      }
+
+
+      @media(width<=650px){
+        .green-btn {
+        padding: 0.5rem 3rem;
+        font-size: 1.3rem;
+      }
+      .main-title{
+        font-size: 2.1rem;
+      }
+      .notes-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      }
+      @media(width<=550px){
+        .green-btn {
+        padding: 0.5rem 2rem;
+        font-size: 1.1rem;
+      }
+      .main-title{
+        font-size: 1.9rem;
+      }
+      .msg-for-list {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      }
+      @media(width<=350px){
+        .green-btn {
+        padding: 0.3rem 2rem;
+        font-size: 1rem;
+      }
+      .main-title{
+        font-size: 1.7rem;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("../include/simple-header") %> 
+    <%- include("../include/flash-msg.ejs") %>
+
+    <main>
+      
+      <section class="sec" id="sec-1">
+        <h1 class="main-title">
+          Edit Your List : <span class="txt-cap imp-txt"><%= listName %></span>
+        </h1>
+        <form action="/lists/edit/name?_method=PUT" method="post">
+          <div>
+            <label for="list-name">Enter New List Name</label>
+            <input
+              type="text"
+              name="newListName"
+              id="list-name"
+              class="txt-cap"
+              value="<%=listName%>"
+              required
+            />
+            <input
+              type="text"
+              name="oldListName"
+              id=""
+              value="<%=listName%>"
+              style="display: none"
+            />
+          </div>
+          <button class="green-btn">Change List Name</button>
+        </form>
+      </section>
+
+      <section class="sec" id="sec-2">
+        <h1 class="main-title">
+          Add Or Remove Notes Of <span class="txt-cap imp-txt"><%= listName %></span> List
+        </h1>
+
+        <div class="added-notes list-notes">
+          <h2>Selected Notes</h2>
+        <div>
+          <% if (noteListName.length > 0) { %>
+          <p class="msg-for-list">
+            Note: Selected notes are already present in Your List,
+            <span class="txt-cap imp-txt"><%= listName %></span>.
+          </p>
+          <% } else{%>
+          <p class="msg-for-list">
+            Note: You Don't have any notes present this Your List,
+            <span class="txt-cap imp-txt"><%= listName %></span>.
+          </p>
+          <% } %>
+
+          <!-- ALL Notes With that list name -->
+          <div class="all-notes">
+            <% for( let i = 0; i < user.notes.length; i++ ) { %> 
+            <%if(noteListName.includes(user.notes[i].name)) { %>
+            <div class="single-note">
+              <div class="notes-name txt-cap"><%= user.notes[i].name %></div>
+              <form action="/lists/edit/notes/<%= user.notes[i]._id %>?_method=DELETE" method="post">
+                <input type="text" name="listName" value="<%=listName%>" id="" style="display: none;">
+                <button class="del-btn">Delete</button>
+              </form>
+            </div>
+            <% } %> 
+            <% } %>
+          </div>
+        </div>
+        </div>
+
+        <!-- All notes which are not in this list          -->
+        <div class="not-added-notes list-notes">
+        <% if (noteListName.length != user.notes.length) { %>
+          <h2>Your Other Notes</h2>
+            <p class="msg-for-list">
+              Note: These notes are not present in Your List,
+              <span class="txt-cap imp-txt"><%= listName %></span>
+              So,You can add them in list.
+            </p>
+        <form action="/lists/edit/notes/new?_method=PUT&listName=<%= listName %>" method="post">
+            <div class="all-notes">
+              <% for( let i = 0; i < user.notes.length; i++ ) { %>
+              <%if(!noteListName.includes(user.notes[i].name)) { %>
+              <div class="single-note">
+                <label for="<%= user.notes[i]._id%>" class="txt-cap notes-name">
+                  <%= user.notes[i].name %>
+                </label>
+                <input
+                  type="checkbox"
+                  name="noteData[<%=i%>]"
+                  id="<%= user.notes[i]._id %>"
+                  value="<%=user.notes[i]._id%>"
+                />
+              </div>
+              <% } %> <% } %>
+            </div>
+          <button class="green-btn">Add Selected Notes</button>
+        </form>
+        <% } %>
+
+        <% if (noteListName.length == user.notes.length) { %>
+        <p class="msg-for-list">Note: All Created notes are present in <span class="txt-cap imp-txt"><%= listName %></span> list.</p>
+        <% } %>
+        </div>
+      </section>
+    </main>
+
+    <%- include("../include/footer.ejs") %>
+  </body>
+</html>
